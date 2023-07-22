@@ -1,2 +1,3 @@
 venv/
 .idea/
+minio/minio_data/
