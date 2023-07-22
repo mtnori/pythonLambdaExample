@@ -2,14 +2,14 @@ version: '3'
 services:
   minio:
     container_name: minio
-    command: [ 'server', '/data', '--console-address', ':9001' ]
+    command: [ 'server', '/data', '--console-address', ':8001' ]
     environment:
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=adminpass
     image: quay.io/minio/minio
     ports:
-      - '9000:9000'
-      - '9001:9001'
+      - '8000:9000'
+      - '8001:8001'
     volumes:
       - ./minio_data:/data
     restart: unless-stopped
@@ -29,3 +29,14 @@ services:
       "
     volumes:
       - ./init_data:/init_data
+  app:
+    image: python-lambda-sample
+    container_name: app
+    environment:
+      - BUCKET_NAME=sample
+      - OBJECT_KEY=from-lambda.png
+      - END_POINT_URL=http://minio:9000
+      - AWS_ACCESS_KEY_ID=admin
+      - AWS_SECRET_ACCESS_KEY=adminpass
+    ports:
+      - '9000:8080'
