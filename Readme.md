@@ -8,7 +8,7 @@ docker tag python-lambda-sample:latest <account_id>.dkr.ecr.ap-northeast-1.amazo
 docker push <account_id>.dkr.ecr.<region_name>.amazonaws.com/python-lambda-sample:latest
 ```
 
-# On Local
+## On Local
 
 ```
 docker build -t python-lambda-sample:latest .
